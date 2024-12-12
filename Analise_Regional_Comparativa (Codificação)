@@ -1,0 +1,12 @@
+#3.Análise Regional Comparativa
+#Selecionar o ano mais recente no dataset
+ano_recente = "Y2019"
+
+#Agrupar por região (Area) e calcular estatisticas
+analise_regional = df.groupBy("Area").agg(F.mean(ano_recente).alias(f"Media_{ano_recente}"), F.expr(f"percentile_approx({ano_recente}, 0.5)").alias(f"Mediana_{ano_recente}"), F.stddev(ano_recente).alias(f"Desvio_{ano_recente}"))
+
+#Ordenar por regiões com maior média
+analise_regional = analise_regional.orderBy(F.desc(f"Media_{ano_recente}"))
+
+#Exibir os reultados
+display(analise_regional)

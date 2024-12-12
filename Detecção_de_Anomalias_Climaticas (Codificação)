@@ -1,0 +1,20 @@
+#4.Detecção de Anomalias Climáticas
+# Selecionando apenas colunas de anos
+anos_colunas = [col for col in df.columns if col.startswith("Y")]
+
+# Calcular média e desvio padrão por ano
+estatisticas_anos = df.select(*[F.mean(ano).alias(f"Media_{ano}") for ano in anos_colunas] +
+                              [F.stddev(ano).alias(f"Desvio_{ano}") for ano in anos_colunas])
+
+# Reformatar os resultados em uma estrutura amigável
+estatisticas_lista = []
+for ano in anos_colunas:
+    media_col = f"Media_{ano}"
+    desvio_col = f"Desvio_{ano}"
+    estatisticas_lista.append((ano, estatisticas_anos.select(media_col).first()[0], estatisticas_anos.select(desvio_col).first()[0]))
+
+# Criar um DataFrame com os resultados
+estatisticas_df = spark.createDataFrame(estatisticas_lista, ["Ano", "Media", "Desvio"])
+
+# Exibir o DataFrame
+display(estatisticas_df)

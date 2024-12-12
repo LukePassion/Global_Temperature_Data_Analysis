@@ -1,0 +1,25 @@
+#Conversão das Estatisticas para o Pandas e visualização no Matplotlib
+estatisticas_pd = estatisticas.toPandas()
+
+#Extrair listas de médias, medianas e desvio padrão
+media_anual = [estatisticas_pd[f"media_{ano}"].iloc[0]for ano in anos_colunas]
+mediana_anual = [estatisticas_pd[f"mediana_{ano}"].iloc[0]for ano in anos_colunas]
+desvio_padrao_anual = [estatisticas_pd[f"desvio_{ano}"].iloc[0]for ano in anos_colunas]
+
+#Listas de anos para o eixo x
+anos = [int(ano[1:])for ano in anos_colunas]
+
+#Plotar o gráfico usando matplotlib
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12, 6))
+plt.plot(anos, media_anual, label="Média Anual", color="blue")
+plt.plot(anos, mediana_anual, label="Mediana Anual", color="green")
+plt.fill_between(anos, [m - d for m, d in zip(media_anual, desvio_padrao_anual)], [m + d for m, d in zip(media_anual, desvio_padrao_anual)], color="blue", alpha=0.2, label="Desvio Padrão")
+
+#Personalizar o gráfico
+plt.xlabel("Ano")
+plt.ylabel("Temperatura")
+plt.title("Análise Temporal de Tendências de temperatura (1961-2019)")
+plt.legend()
+plt.grid(True)
+plt.show()

@@ -1,0 +1,24 @@
+#2. Análise Sazonal
+from pyspark.sql import functions as F
+
+#Agrupar por mês para calcular a média, mediana e desvio padrão
+analise_sazonal = df.groupBy("Months").agg(F.mean("Y2019").alias("Media_2019"), F.expr("percentile_approx(Y2019, 0.5)").alias("Media_2019"), F.stddev("Y2019").alias("Desvio_2019"))
+
+# Ordenar os meses na sequência correta
+analise_sazonal = analise_sazonal.orderBy(
+    F.when(F.col("Months") == "January", 1)
+     .when(F.col("Months") == "February", 2)
+     .when(F.col("Months") == "March", 3)
+     .when(F.col("Months") == "April", 4)
+     .when(F.col("Months") == "May", 5)
+     .when(F.col("Months") == "June", 6)
+     .when(F.col("Months") == "July", 7)
+     .when(F.col("Months") == "August", 8)
+     .when(F.col("Months") == "September", 9)
+     .when(F.col("Months") == "October", 10)
+     .when(F.col("Months") == "November", 11)
+     .when(F.col("Months") == "December", 12)
+)
+
+#Exibir os resultados
+display(analise_sazonal)

@@ -1,0 +1,14 @@
+#3.1 Filtro para Regiões Especificas (se necessário)
+#Filtrar regiões especificas
+regioes_interesse = ["Brazil", "Iceland"]
+df_filtrado = df.filter(F.col("Area").isin(regioes_interesse))
+
+#Repetir a analise apenas para essas regiões
+analise_regional_filtrada = df_filtrado.groupBy("Area").agg(
+    F.mean(ano_recente).alias(f"Media_{ano_recente}"),
+    F.expr(f"percentile_approx({ano_recente}, 0.5)").alias(f"Mediana_{ano_recente}"),
+    F.stddev(ano_recente).alias(f"Desvio_{ano_recente}")
+)
+
+# Exibir os resultados filtrados
+display(analise_regional_filtrada)

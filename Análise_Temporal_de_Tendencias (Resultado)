@@ -1,0 +1,14 @@
+
+*Obs: Optei por apresentar os resultados de 10 em 10 anos, pois ficaria muito extenso apresentar todos os anos analisados neste projeto.
+
+media_Y1961   media_Y1971   media_1981  media_Y1991  media_Y2001  media_Y2011  media_Y2019|
+0.40          0.24          0.43        0.49         0.74         0.76         1.09       |      
+-------------------------------------------------------------------------------------------
+
+mediana_Y1961  mediana_Y1971  mediana_Y1981  mediana_Y1991  mediana_Y2001  mediana_Y2011  mediana_Y2019|
+0.33           0.30           0.40           0.44           0.59           0.64           0.93         |
+--------------------------------------------------------------------------------------------------------
+
+desvio_Y1961  desvio_Y1971  desvio_Y1981  desvio_Y1991  desvio_Y2001  desvio_Y2011  desvio_Y2019|
+0.70          0.72          0.70          0.65          0.78          0.75          0.85        |
+-------------------------------------------------------------------------------------------------
